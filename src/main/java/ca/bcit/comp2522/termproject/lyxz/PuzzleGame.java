@@ -4,11 +4,23 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * The PuzzleGame class.
+ * @version 2023
+ * @author Lulu Dong
+ */
 public class PuzzleGame extends Application {
-
-    private GameUI gameUI;
-    private GameLogic gameLogic;
-
+    /**
+     * The width and height of the window.
+     */
+    public static final double WIDTH = 603;
+    /**
+     * The width and height of the window.
+     */
+    public static final double HEIGHT = 680;
+    /**
+     * Init method.
+     */
     @Override
     public void init() {
         GameUtils.preloadSound("move.mp3");
@@ -16,16 +28,20 @@ public class PuzzleGame extends Application {
         GameUtils.preloadSound("win.mp3");
     }
 
+    /**
+     * Start method.
+     * @param primaryStage the primary stage
+     */
     @Override
-    public void start(Stage primaryStage) {
-        gameLogic = new GameLogic();
-        gameUI = new GameUI(gameLogic);
+    public void start(final Stage primaryStage) {
+        GameLogic gameLogic = new GameLogic();
+        GameUI gameUI = new GameUI(gameLogic);
 
         gameLogic.initializeData();
         gameLogic.shuffleData();
 
         gameUI.updateGridPane();
-        Scene scene = new Scene(gameUI.getRoot(), 603, 680);
+        Scene scene = new Scene(gameUI.getRoot(), WIDTH, HEIGHT);
         primaryStage.setTitle("PuzzleQuest");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -33,7 +49,11 @@ public class PuzzleGame extends Application {
         gameUI.playRandomMusic();
     }
 
-    public static void main(String[] args) {
+    /**
+     * The main method.
+     * @param args the arguments
+     */
+    public static void main(final String[] args) {
         launch(args);
     }
 }
